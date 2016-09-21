@@ -1,10 +1,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Template</title>
+    <title>Restaurant Rater</title>
   </head>
   <body>
-      <p>hi</p>
-      <a href="/test"><button type="submit" name="button">Tester</button></a>
+      {% if restaurants is not empty %}
+        <h3>Your Restaurants</h3>
+          <ul>
+        {% for restaurant in restaurants %}
+            <li>{{ restaurant.getName }}</li>
+        {% endfor %}
+          </ul>
+      {% endif %}
+        <h3>Add a restaurant</h3>
+        <form action="/restaurants" method="post">
+            <label for="">Name</label>
+            <input type="text" name="restaurant_name" value="">
+            <label for="">Cuisine</label>
+            <input type="text" name="restaurant_cuisine" value="">
+            <label for="">Description</label>
+            <input type="text" name="restaurant_description" value="">
+            <button type="submit" name="button">submit</button>
+        </form>
   </body>
 </html>
