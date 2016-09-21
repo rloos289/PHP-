@@ -8,7 +8,7 @@
     require_once "src/Cuisine.php";
     require_once "src/Restaurant.php";
 
-    $server = 'mysql:host=localhost;dbname=best_restaurants';
+    $server = 'mysql:host=localhost;dbname=best_restaurants_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -24,6 +24,7 @@
         {
             Cuisine::deleteAll();
             Restaurant::deleteAll();
+            Review::deleteAll();
         }
 
         function test_save()

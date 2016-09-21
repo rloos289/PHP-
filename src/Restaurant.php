@@ -61,6 +61,21 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getID()};");
         }
 
+        function reviewSearch()
+        {
+            $returned_reviews = $GLOBALS['DB']->query("SELECT * FROM reviews WHERE restaurant_id = {$this->getId()};");
+            $reviewArray = array();
+            foreach ($returned_reviews as $review) {
+                $text_review = $review['text_review'];
+                $score_review = (int) $review['score_review'];
+                $id = $review['id'];
+                $restaurant_id = $review['restaurant_id'];
+                $new_review = new Review ($text_review, $score_review, $restaurant_id, $id);
+                array_push($reviewArray, $new_review);
+            }
+            return $reviewArray;
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant;");

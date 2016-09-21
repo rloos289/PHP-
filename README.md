@@ -39,6 +39,13 @@ _You must host this webpage locally_
 | add cuisine id to each restaurant | "Olive Garden" | 1 |
 | list all restaurants in a category | Italian | "Olive Garden", "Sicilian Garden" |
 
+| Create a review category for text | "I liked it" | "I liked it" |
+| Create a review category for rating (out of five) | "3" | "3" |
+| List all reviews | click | "I liked it","I hated it" |
+| Save review | "I liked it" | "I liked it" |
+| delete all reviews | "I liked it" | "" |
+
+
 ## Known Bugs
 
 _None yet_

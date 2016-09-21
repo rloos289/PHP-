@@ -7,9 +7,10 @@
 
     require_once "src/Cuisine.php";
     require_once "src/Restaurant.php";
+    require_once "src/Review.php";
 
 
-    $server = 'mysql:host=localhost;dbname=best_restaurants';
+    $server = 'mysql:host=localhost;dbname=best_restaurants_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -23,8 +24,9 @@
     {
         protected function teardown()
         {
-            Restaurant::deleteAll();
             Cuisine::deleteAll();
+            Restaurant::deleteAll();
+            Review::deleteAll();
         }
 
         function test_save()
@@ -113,6 +115,26 @@
             $result = Restaurant::find($test_restaurant1->getId());
 
             $this->assertEquals($test_restaurant1, $result);
+        }
+
+        function test_reviewSearch()
+        {
+            $restaurant = "Olive Garden";
+            $description = "Serves food";
+            $test_restaurant = new Restaurant($restaurant, $description, 1);
+            $test_restaurant->save();
+            $text_review1 = "It were gud";
+            $score_review1 = 3;
+            $test_review1 = new Review($text_review1, $score_review1, $test_restaurant->getId());
+            $test_review1->save();
+            $text_review2 = "It were bad";
+            $score_review2 = 1;
+            $test_review2 = new Review($text_review2, $score_review2, $test_restaurant->getId());
+            $test_review2->save();
+
+            $result = $test_restaurant->reviewSearch();
+
+            $this->assertEquals([$test_review1, $test_review2], $result);
         }
     }
 ?>
