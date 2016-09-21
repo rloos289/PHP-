@@ -63,6 +63,31 @@
 
             $this->assertEquals([], $result);
         }
+
+        function test_update()
+        {
+            $cuisine = "Italian";
+            $test_cuisine = new Cuisine($cuisine);
+            $test_cuisine->save();
+            $test_cuisine->update("Thai");
+
+            $result = $test_cuisine->getCuisineType();
+
+            $this->assertEquals("Thai", $result);
+        }
+
+        function test_delete()
+        {
+            $cuisine = "Italian";
+            $test_cuisine = new Cuisine($cuisine);
+            $test_cuisine->save();
+            $id = $test_cuisine->getId();
+            $test_cuisine->delete();
+
+            $result = Cuisine::find($id);
+
+            $this->assertEquals(null, $result);
+        }
     }
       // Testcode example
       //  function test_makeTitleCase_oneWord()
