@@ -8,7 +8,7 @@
         <h3>Your Restaurants</h3>
           <ul>
         {% for restaurant in restaurants %}
-            <li>{{ restaurant.getName }}</li>
+            <li><a href='/restaurant/{{ restaurant.getId }}'>{{ restaurant.getName }}</a></li>
         {% endfor %}
           </ul>
       {% endif %}
@@ -21,6 +21,10 @@
             <label for="">Description</label>
             <input type="text" name="restaurant_description" value="">
             <button type="submit" name="button">submit</button>
+        </form>
+        <a href=/restaurants><button type="button" name="button">View your list</button></a>
+        <form action="/clear" method="post">
+            <button type="submit" name="button">Clear your list</button>
         </form>
   </body>
 </html>

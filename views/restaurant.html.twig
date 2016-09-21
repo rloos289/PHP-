@@ -10,6 +10,9 @@
         <p>{{ restaurant.getDescription }}</p>
         <h2>Cuisine Type:</h2>
         <p> {{ cuisine.getCuisineType }}</p>
-
+        <form action="/restaurant/{{ restaurant.getId }}" method="post">
+            <input name="_method" type= "hidden" value="delete">
+            <button type="submit" name="button">Delete this restaurant</button>
+        </form>
     </body>
 </html>

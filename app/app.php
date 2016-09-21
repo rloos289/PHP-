@@ -17,7 +17,9 @@
     'twig.path' => __DIR__.'/../views'
     ));
 
-  //loads actual twig file
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     $app->get("/", function() use ($app) {
       return $app['twig']->render("home.html.twig", array('restaurants' => Restaurant::getAll()));
     });
@@ -45,10 +47,36 @@
         return $app['twig']->render("restaurants.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisines' => Cuisine::getAll()));
     });
 
+    $app->post("/clear", function() use ($app) {
+        Restaurant::deleteAll();
+        Cuisine::deleteAll();
+        return $app['twig']->render("home.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisine' => Cuisine::getAll()));
+    });
+
+    $app->get("/restaurants", function() use($app) {
+        return $app['twig']->render("restaurants.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisines' => Cuisine::getAll()));
+    });
+
+    $app->get("/restaurants", function() use($app) {
+        return $app['twig']->render("home.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisines' => Cuisine::getAll()));
+    });
+
+    $app->delete("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        return $app['twig']->render("restaurants.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisines' => Cuisine::getAll()));
+    });
+
     $app->get("/restaurant/{id}", function($id) use ($app) {
         $restaurant = Restaurant::find($id);
         $cuisine = Cuisine::find($restaurant->getCuisineId());
         return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine));
+    });
+
+    $app->get("/cuisine/{id}", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $restaurant_list = $cuisine->restaurantSearch();
+        return $app['twig']->render("cuisine.html.twig", array('restaurants' => $restaurant_list, 'cuisine' => $cuisine));
     });
 
   //loads basic php

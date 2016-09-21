@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Cuisine sort</title>
+    </head>
+    <body>
+      <h1>{{ cuisine.getCuisineType }} Restaurants</h1>
+      {% for restaurant in restaurants %}
+        <li> {{ restaurant.getName }} </li>
+      {% endfor %}
+    </body>
+</html>
