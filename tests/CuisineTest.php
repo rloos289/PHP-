@@ -88,6 +88,20 @@
 
             $this->assertEquals(null, $result);
         }
+
+        function test_find()
+        {
+            $cuisine1 = "Italian";
+            $cuisine2 = "Thai";
+            $test_cuisine1 = new Cuisine($cuisine1);
+            $test_cuisine1->save();
+            $test_cuisine2 = new Cuisine($cuisine2);
+            $test_cuisine2->save();
+
+            $result = Cuisine::find($test_cuisine1->getId());
+
+            $this->assertEquals($test_cuisine1, $result);
+        }
     }
       // Testcode example
       //  function test_makeTitleCase_oneWord()
