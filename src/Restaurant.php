@@ -76,6 +76,21 @@
             return $reviewArray;
         }
 
+        function scoreAverage()
+        {
+            $returned_reviews = $GLOBALS['DB']->query("SELECT * FROM reviews WHERE restaurant_id = {$this->getId()};");
+            $reviewArray = array();
+            foreach ($returned_reviews as $review) {
+                // $text_review = $review['text_review'];
+                $score_review = (int) $review['score_review'];
+                // $id = $review['id'];
+                // $restaurant_id = $review['restaurant_id'];
+                array_push($reviewArray, $score_review);
+            }
+            return array_sum($reviewArray)/count($reviewArray); 
+        }
+
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant;");

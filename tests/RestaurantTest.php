@@ -136,5 +136,29 @@
 
             $this->assertEquals([$test_review1, $test_review2], $result);
         }
+
+        function test_review_score_average()
+        {
+            $restaurant = "Olive Garden";
+            $description = "Serves food";
+            $test_restaurant = new Restaurant($restaurant, $description, 1);
+            $test_restaurant->save();
+            $text_review1 = "It were gud";
+            $score_review1 = 3;
+            $test_review1 = new Review($text_review1, $score_review1, $test_restaurant->getId());
+            $test_review1->save();
+            $text_review2 = "It were bad";
+            $score_review2 = 1;
+            $test_review2 = new Review($text_review2, $score_review2, $test_restaurant->getId());
+            $test_review2->save();
+            $text_review3 = "I like";
+            $score_review3 = 5;
+            $test_review3 = new Review($text_review3, $score_review3, $test_restaurant->getId());
+            $test_review3->save();
+
+            $result = $test_restaurant->scoreAverage();
+
+            $this->assertEquals(3, $result);
+        }
     }
 ?>
