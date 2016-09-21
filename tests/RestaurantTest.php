@@ -30,7 +30,8 @@
         function test_save()
         {
             $restaurant = "Olive Garden";
-            $test_restaurant = new Restaurant($restaurant, 1);
+            $description = "Serves food";
+            $test_restaurant = new Restaurant($restaurant, $description, 1);
             $test_restaurant->save();
 
             $result = Restaurant::getAll();
@@ -41,10 +42,12 @@
         function test_get_all()
         {
             $restaurant1 = "Olive Garden";
+            $description1 = "Serves food";
             $restaurant2 = "Thai Orchid";
-            $test_restaurant1 = new Restaurant($restaurant1, 1);
+            $description2 = "Serves food";
+            $test_restaurant1 = new Restaurant($restaurant1, $description1, 1);
             $test_restaurant1->save();
-            $test_restaurant2 = new Restaurant($restaurant2, 2);
+            $test_restaurant2 = new Restaurant($restaurant2, $description2, 2);
             $test_restaurant2->save();
 
             $result = Restaurant::getAll();
@@ -55,10 +58,12 @@
         function test_deleteAll()
         {
             $restaurant1 = "Olive Garden";
+            $description1 = "Serves food";
             $restaurant2 = "Thai Orchid";
-            $test_restaurant1 = new Restaurant($restaurant1, 1);
+            $description2 = "Serves food";
+            $test_restaurant1 = new Restaurant($restaurant1, $description1, 1);
             $test_restaurant1->save();
-            $test_restaurant2 = new Restaurant($restaurant2, 2);
+            $test_restaurant2 = new Restaurant($restaurant2, $description2, 2);
             $test_restaurant2->save();
 
             Restaurant::deleteAll();
@@ -70,7 +75,8 @@
         function test_update()
         {
             $restaurant = "Olive Garden";
-            $test_restaurant = new Restaurant($restaurant, 1);
+            $description = "Serves food";
+            $test_restaurant = new Restaurant($restaurant, $description, 1);
             $test_restaurant->save();
             $test_restaurant->update("Thai Orchid");
 
@@ -82,7 +88,8 @@
         function test_delete()
         {
             $restaurant = "Olive Garden";
-            $test_restaurant = new Restaurant($restaurant, 1);
+            $description = "Serves food";
+            $test_restaurant = new Restaurant($restaurant, $description, 1);
             $test_restaurant->save();
             $id = $test_restaurant->getId();
             $test_restaurant->delete();
@@ -95,10 +102,12 @@
         function test_find()
         {
             $restaurant1 = "Olive Garden";
+            $description1 = "Serves food";
             $restaurant2 = "Thai Orchid";
-            $test_restaurant1 = new Restaurant($restaurant1, 1);
+            $description2 = "Serves food";
+            $test_restaurant1 = new Restaurant($restaurant1, $description1, 1);
             $test_restaurant1->save();
-            $test_restaurant2 = new Restaurant($restaurant2, 2);
+            $test_restaurant2 = new Restaurant($restaurant2, $description2, 2);
             $test_restaurant2->save();
 
             $result = Restaurant::find($test_restaurant1->getId());

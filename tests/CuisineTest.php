@@ -6,6 +6,7 @@
     */
 
     require_once "src/Cuisine.php";
+    require_once "src/Restaurant.php";
 
     $server = 'mysql:host=localhost;dbname=best_restaurants';
     $username = 'root';
@@ -22,6 +23,7 @@
         protected function teardown()
         {
             Cuisine::deleteAll();
+            Restaurant::deleteAll();
         }
 
         function test_save()
@@ -101,6 +103,26 @@
             $result = Cuisine::find($test_cuisine1->getId());
 
             $this->assertEquals($test_cuisine1, $result);
+        }
+
+        function test_cuisine_id_search()
+        {
+            $cuisine = "Italian";
+            $test_cuisine = new Cuisine($cuisine);
+            $test_cuisine->save();
+            $restaurant1 = "Olive Garden";
+            $description1 = "Serves food";
+            $restaurant2 = "Sicilian Garden";
+            $description2 = "Serves food";
+            $test_restaurant1 = new Restaurant($restaurant1, $description1, $test_cuisine->getId());
+            $test_restaurant1->save();
+            $test_restaurant2 = new Restaurant($restaurant2, $description2, $test_cuisine->getId());
+            $test_restaurant2->save();
+
+
+            $result = $test_cuisine->restaurantSearch();
+
+            $this->assertEquals([$test_restaurant1, $test_restaurant2], $result);
         }
     }
       // Testcode example
