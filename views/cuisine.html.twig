@@ -6,7 +6,8 @@
     <body>
       <h1>{{ cuisine.getCuisineType }} Restaurants</h1>
       {% for restaurant in restaurants %}
-        <li> {{ restaurant.getName }} </li>
+        <li> <a href='/restaurant/{{ restaurant.getId }}'>{{ restaurant.getName }} </a></li>
       {% endfor %}
+      <a href="/restaurants">All Restaurants</a>
     </body>
 </html>

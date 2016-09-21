@@ -73,6 +73,15 @@
         return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine));
     });
 
+    $app->patch("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $newName = $_POST['name'];
+        $restaurant->update($newName);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine));
+
+    });
+
     $app->get("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $restaurant_list = $cuisine->restaurantSearch();
