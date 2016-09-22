@@ -1,8 +1,27 @@
-#p1 {
-  color: red;
+form label {
+  display: block;
 }
 
-#button {
-  margin-left: 45%;
-  margin-top: 20%;
+form input {
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  margin-bottom: 5px;
+}
+
+.reviews h3 {
+  text-align: center;
+}
+
+.reviews li {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
 }

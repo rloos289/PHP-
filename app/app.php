@@ -51,6 +51,7 @@
     $app->post("/clear", function() use ($app) {
         Restaurant::deleteAll();
         Cuisine::deleteAll();
+        Review::deleteAll();
         return $app['twig']->render("home.html.twig", array('restaurants' => Restaurant::getAll(), 'cuisine' => Cuisine::getAll()));
     });
 
@@ -87,6 +88,8 @@
     });
 
     $app->patch("/restaurantreview/{id}", function($id) use ($app) {
+        $new_review_text = null;
+        $new_review_score = null;
         $new_review_text = $_POST['review_input'];
         $new_review_score = $_POST['score_input'];
         $newReview = new Review ($new_review_text, $new_review_score, $id);
