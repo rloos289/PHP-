@@ -21,6 +21,24 @@
             <input name="_method" type= "hidden" value="delete">
             <button type="submit" name="button">Delete this restaurant</button>
         </form>
-        <a href="/restaurants">All Restaurants</a>
+        <h3>Add a review</h3>
+        <form action="/restaurantreview/{{ restaurant.getId }}" method="post">
+            <p>Enter your text review here</p>
+            <input type="hidden" name="_method" value="patch">
+            <input type="text" name="review_input" value="" required >
+            <p>Enter a score (1-5) here </p>
+            <input type="number" name="score_input" value="" max="5">
+            <button type="submit" name="button">Submit review</button>
+        </form>
+        {% if reviews is not empty %}
+            <h3>User Reviews:</h3>
+            <h3>Review Average: {{ restaurant.scoreAverage }}</h3>
+            <ul>
+                {% for review in reviews %}
+                    <li>{{ review.getTextReview }}</li>
+                {% endfor%}
+            </ul>
+        {% endif %}
+        <a href="/restaurants"><button type="button" name="button">All restaurants</button></a>
     </body>
 </html>

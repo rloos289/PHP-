@@ -3,6 +3,7 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Restaurant.php";
     require_once __DIR__."/../src/Cuisine.php";
+    require_once __DIR__."/../src/Review.php";
 
     $server = 'mysql:host=localhost;dbname=best_restaurants';
     $username = 'root';
@@ -70,7 +71,9 @@
     $app->get("/restaurant/{id}", function($id) use ($app) {
         $restaurant = Restaurant::find($id);
         $cuisine = Cuisine::find($restaurant->getCuisineId());
-        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine));
+        $restaurant = Restaurant::find($id);
+        $allReviews = $restaurant->reviewSearch();
+        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine, 'reviews' => $allReviews));
     });
 
     $app->patch("/restaurant/{id}", function($id) use ($app) {
@@ -78,8 +81,20 @@
         $newName = $_POST['name'];
         $restaurant->update($newName);
         $cuisine = Cuisine::find($restaurant->getCuisineId());
-        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine));
+        $restaurant = Restaurant::find($id);
+        $allReviews = $restaurant->reviewSearch();
+        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine, 'reviews' => $allReviews));
+    });
 
+    $app->patch("/restaurantreview/{id}", function($id) use ($app) {
+        $new_review_text = $_POST['review_input'];
+        $new_review_score = $_POST['score_input'];
+        $newReview = new Review ($new_review_text, $new_review_score, $id);
+        $newReview->save();
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $allReviews = $restaurant->reviewSearch();
+        return $app['twig']->render("restaurant.html.twig", array('restaurant' => $restaurant, 'cuisine' =>$cuisine, 'reviews' => $allReviews));
     });
 
     $app->get("/cuisine/{id}", function($id) use ($app) {

@@ -87,7 +87,7 @@
                 // $restaurant_id = $review['restaurant_id'];
                 array_push($reviewArray, $score_review);
             }
-            return array_sum($reviewArray)/count($reviewArray); 
+            return array_sum($reviewArray)/count($reviewArray);
         }
 
 
