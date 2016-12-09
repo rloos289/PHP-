@@ -1,12 +1,9 @@
-# _{Application Name}_
+# _Restaurants_
 
-#### _{Brief description of application}, {Date of current version}_
+#### _Allows users to create and sort restaurants by their cuisine type_
 
 #### By _**Ryan Loos**_
 
-## Description
-
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
 
 ## Setup/Installation Requirements
 
